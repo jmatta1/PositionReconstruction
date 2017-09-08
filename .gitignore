@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# QT Creator meta-data file
+CMakeLists.txt.user
+
 # Build directory
 build
 
