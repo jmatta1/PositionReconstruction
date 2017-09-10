@@ -4,6 +4,7 @@
 // includes for C system headers
 // includes for C++ system headers
 #include<string>
+#include<ostream>
 // includes from other libraries
 // includes from this code
 
@@ -27,7 +28,7 @@ public:
     void setSetNumCores(int input){numCores = input; setNumCores_ = true;}
     
     bool validate(){return (setDetSpecInputFile_ && setDetPosInputFile_ && setPanelPosInputFile_ &&
-                            setPanelSpecOutputFile_ && setSrcDataOutputFile_ && setSetNumCores_);}
+                            setPanelSpecOutputFile_ && setSrcDataOutputFile_ && setNumCores_);}
     void printValidationErrors();
 
     friend std::ostream& operator<<(std::ostream& os, const ConfigData& cd);
@@ -37,7 +38,7 @@ private:
     bool setPanelPosInputFile_;
     bool setPanelSpecOutputFile_;
     bool setSrcDataOutputFile_;
-    bool setSetNumCores_;
+    bool setNumCores_;
 };
 
 #endif //POSITIONRECONSTRUCTION_SRC_INPUT_CONFIGDATA_H

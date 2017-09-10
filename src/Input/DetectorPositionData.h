@@ -4,6 +4,7 @@
 // includes for C system headers
 // includes for C++ system headers
 #include<vector>
+#include<ostream>
 // includes from other libraries
 // includes from this code
 

@@ -7,17 +7,6 @@
 // includes from other libraries
 // includes from this code
 
-/*
-
-    std::vector<int> panelNumber;
-    std::vector<float> xPosition;
-    std::vector<float> xHalfSize;
-    std::vector<float> yPosition;
-    std::vector<float> yHalfSize;
-    std::vector<float> zPosition;
-    std::vector<float> zHalfSize;
-  
-*/
 bool PanelPositionData::validate()
 {
     bool notEmpty = ((panelNumber.size() > 0) &&
@@ -71,7 +60,7 @@ std::ostream& operator<<(std::ostream& os, const PanelPositionData& ppd)
     os << "| Panel Number | X Pos. | X Size | Y Pos. | Y Size | Z Pos. | Z Size |" << std::endl;
     os << "|--------------|--------|--------|--------|--------|--------|--------|" << std::endl;
     
-    int size = dpd.detectorNumber.size();
+    int size = ppd.panelNumber.size();
     
     for(int i=0; i<size; ++i)
     {

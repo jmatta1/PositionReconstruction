@@ -28,7 +28,7 @@ void ConfigData::printValidationErrors()
     {
         std::cout << "The source data output file was not set." << std::endl;
     }
-    if(setSetNumCores_)
+    if(setNumCores_)
     {
         std::cout << "The number of cores was not set." << std::endl;
     }
