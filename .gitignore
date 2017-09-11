@@ -4,8 +4,10 @@
 # QT Creator meta-data file
 CMakeLists.txt.user
 
-# Build directory
+# Directories
 build
+data
+output
 
 # Compiled Object files
 *.slo
