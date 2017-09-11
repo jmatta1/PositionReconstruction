@@ -32,7 +32,7 @@ public:
     
     bool validate(){return (setDetSpecInputFile_ && setDetPosInputFile_ && setPanelPosInputFile_ &&
                             setPanelSpecOutputFile_ && setSrcDataOutputFile_ && setNumCores_);}
-    void printValidationErrors();
+    void printValidationErrors(std::ostream& os);
 
     friend std::ostream& operator<<(std::ostream& os, const ConfigData& cd);
 private:

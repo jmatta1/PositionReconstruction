@@ -29,7 +29,7 @@ public:
     void addZPosition(float input){zPosition.push_back(input);}
 
     bool validate();
-    void printValidation();
+    void printValidationErrors(std::ostream& os);
 
     friend std::ostream& operator<<(std::ostream& os, const DetectorPositionData& dpd);
 private:

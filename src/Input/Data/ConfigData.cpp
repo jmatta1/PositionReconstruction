@@ -2,7 +2,6 @@
 
 // includes for C system headers
 // includes for C++ system headers
-#include<iostream>
 // includes from other libraries
 // includes from this code
 
@@ -11,31 +10,31 @@ namespace Input
 namespace Data
 {
 
-void ConfigData::printValidationErrors()
+void ConfigData::printValidationErrors(std::ostream& os)
 {
     if(setDetSpecInputFile_)
     {
-        std::cout << "The detector spectrum input file was not set" << std::endl;
+        os << "The detector spectrum input file was not set" << std::endl;
     }
     if(setDetPosInputFile_)
     {
-        std::cout << "The detector position input file was not set" << std::endl;
+        os << "The detector position input file was not set" << std::endl;
     }
     if(setPanelPosInputFile_)
     {
-        std::cout << "The AD panel input file was not set" << std::endl;
+        os << "The AD panel input file was not set" << std::endl;
     }
     if(setPanelSpecOutputFile_)
     {
-        std::cout << "The panel spectrum output file was not set" << std::endl;
+        os << "The panel spectrum output file was not set" << std::endl;
     }
     if(setSrcDataOutputFile_)
     {
-        std::cout << "The source data output file was not set." << std::endl;
+        os << "The source data output file was not set." << std::endl;
     }
     if(setNumCores_)
     {
-        std::cout << "The number of cores was not set." << std::endl;
+        os << "The number of cores was not set." << std::endl;
     }
 }
 

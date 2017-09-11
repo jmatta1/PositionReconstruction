@@ -2,7 +2,6 @@
 
 // includes for C system headers
 // includes for C++ system headers
-#include<iostream>
 #include<iomanip>
 // includes from other libraries
 // includes from this code
@@ -29,7 +28,7 @@ bool DetectorPositionData::validate()
     return (notEmpty && equalSize);
 }
 
-void DetectorPositionData::printValidation()
+void DetectorPositionData::printValidationErrors(std::ostream& os)
 {
     bool notEmpty = ((detectorNumber.size() > 0) &&
                      (runNumber.size() > 0) &&
@@ -44,12 +43,12 @@ void DetectorPositionData::printValidation()
                       (zPosition.size() == tempSize));
     if(notEmpty)
     {
-        std::cout << "There must be at least one entry in each column" << std::endl;
+        os << "There must be at least one entry in each column" << std::endl;
     }
     
     if(equalSize)
     {
-        std::cout << "Each column must have the same number of entries" << std::endl;
+        os << "Each column must have the same number of entries" << std::endl;
     }
 }
 
@@ -64,10 +63,10 @@ std::ostream& operator<<(std::ostream& os, const DetectorPositionData& dpd)
     {
         os <<  "| " << std::setw(15) << dpd.detectorNumber[i];
         os << " | " << std::setw(10) << dpd.runNumber[i];
-        os << " | " << std::setw(10) << std::setprecision(1) << dpd.xPosition[i];
-        os << " | " << std::setw(10) << std::setprecision(1) << dpd.yPosition[i];
-        os << " | " << std::setw(10) << std::setprecision(1) << dpd.zPosition[i];
-        os << " |";
+        os << " | " << std::setw(10) << dpd.xPosition[i];
+        os << " | " << std::setw(10) << dpd.yPosition[i];
+        os << " | " << std::setw(10) << dpd.zPosition[i];
+        os << " |\n";
     }
     
     return os << "|-----------------|------------|------------|------------|------------|";
