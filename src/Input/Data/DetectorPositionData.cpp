@@ -7,6 +7,11 @@
 // includes from other libraries
 // includes from this code
 
+namespace Input
+{
+namespace Data
+{
+
 bool DetectorPositionData::validate()
 {
     bool notEmpty = ((detectorNumber.size() > 0) &&
@@ -66,4 +71,7 @@ std::ostream& operator<<(std::ostream& os, const DetectorPositionData& dpd)
     }
     
     return os << "|-----------------|------------|------------|------------|------------|";
+}
+
+}
 }

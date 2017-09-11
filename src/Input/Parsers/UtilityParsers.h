@@ -1,11 +1,16 @@
-#ifndef POSITIONDECOMPOSER_SRC_INPUTLIB_UTILITYPARSERS_H
-#define POSITIONDECOMPOSER_SRC_INPUTLIB_UTILITYPARSERS_H
+#ifndef POSITIONDECOMPOSER_SRC_INPUT_PARSERS_UTILITYPARSERS_H
+#define POSITIONDECOMPOSER_SRC_INPUT_PARSERS_UTILITYPARSERS_H
 
 // includes for C system headers
 // includes for C++ system headers
 // includes from other libraries
 #include <boost/spirit/include/qi.hpp>
-// includes from ORCHIDReader
+// includes from this code
+
+namespace Input
+{
+namespace Parsers
+{
 
 namespace Utility
 {
@@ -85,4 +90,6 @@ private:
 
 }
 
+}
+}
 #endif  // POSITIONDECOMPOSER_SRC_INPUTLIB_UTILITYPARSERS_H

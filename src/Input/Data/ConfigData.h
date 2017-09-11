@@ -8,7 +8,10 @@
 // includes from other libraries
 // includes from this code
 
-
+namespace Input
+{
+namespace Data
+{
 
 class ConfigData
 {
@@ -41,4 +44,7 @@ private:
     bool setNumCores_;
 };
 
+}
+
+}
 #endif //POSITIONRECONSTRUCTION_SRC_INPUT_DATA_CONFIGDATA_H

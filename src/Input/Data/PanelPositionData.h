@@ -8,6 +8,11 @@
 // includes from other libraries
 // includes from this code
 
+namespace Input
+{
+namespace Data
+{
+
 class PanelPositionData
 {
 public:
@@ -35,4 +40,6 @@ private:
 
 };
 
+}
+}
 #endif //POSITIONRECONSTRUCTION_SRC_INPUT_DATA_PANELPOSITIONDATA_H

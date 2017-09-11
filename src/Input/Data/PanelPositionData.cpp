@@ -7,6 +7,11 @@
 // includes from other libraries
 // includes from this code
 
+namespace Input
+{
+namespace Data
+{
+
 bool PanelPositionData::validate()
 {
     bool notEmpty = ((panelNumber.size() > 0) &&
@@ -75,4 +80,7 @@ std::ostream& operator<<(std::ostream& os, const PanelPositionData& ppd)
     }
     
     return os << "|--------------|--------|--------|--------|--------|--------|--------|";
+}
+
+}
 }

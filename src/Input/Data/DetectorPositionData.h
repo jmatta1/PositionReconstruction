@@ -8,6 +8,11 @@
 // includes from other libraries
 // includes from this code
 
+namespace Input
+{
+namespace Data
+{
+
 class DetectorPositionData
 {
 public:
@@ -31,4 +36,6 @@ private:
 
 };
 
+}
+}
 #endif //POSITIONRECONSTRUCTION_SRC_INPUT_DATA_DETECTORPOSITIONDATA_H

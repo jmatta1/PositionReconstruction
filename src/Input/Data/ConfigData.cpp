@@ -6,6 +6,11 @@
 // includes from other libraries
 // includes from this code
 
+namespace Input
+{
+namespace Data
+{
+
 void ConfigData::printValidationErrors()
 {
     if(setDetSpecInputFile_)
@@ -45,4 +50,7 @@ std::ostream& operator<<(std::ostream& os, const ConfigData& cd)
        << "    Source Data Ouput File        = " << cd.srcDataOutputFile   << "\n"
        << "    Number of Cores               = " << cd.numCores            << "\n";
     return os << "[End Configuration Input]";
+}
+
+}
 }

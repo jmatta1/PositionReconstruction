@@ -13,6 +13,11 @@
 #include"Input/Data/ConfigData.h"
 #include"UtilityParsers.h"
 
+namespace Input
+{
+namespace Parsers
+{
+
 namespace qi = boost::spirit::qi;
 
 // the main gammar
@@ -20,7 +25,7 @@ template <typename Iterator>
 struct ConfigParser : qi::grammar<Iterator>
 {
 public:
-    ConfigParser(ConfigData* cd) : ConfigParser::base_type(startRule), ptr(cd)
+    ConfigParser(Data::ConfigData* cd) : ConfigParser::base_type(startRule), ptr(cd)
     {
         namespace phoenix = boost::phoenix;
         using qi::skip;
@@ -32,12 +37,12 @@ public:
         using Utility::eol_;
         using Utility::separator;
         //define the rules to parse the parameters
-        detSif = (lexeme["DetSpecInputFile"]    >> '=' > quotedString [phoenix::bind(&ConfigData::setDetSpecInputFile, ptr, qi::_1)] > separator);
-        detPif = (lexeme["DetPosInputFile"]     >> '=' > quotedString [phoenix::bind(&ConfigData::setDetPosInputFile, ptr, qi::_1)] > separator);
-        panPif = (lexeme["PanelPosInputFile"]   >> '=' > quotedString [phoenix::bind(&ConfigData::setPanelPosInputFile, ptr, qi::_1)] > separator);
-        panSof = (lexeme["PanelSpecOutputFile"] >> '=' > quotedString [phoenix::bind(&ConfigData::setPanelSpecOutputFile, ptr, qi::_1)] > separator);
-        srcDof = (lexeme["SrcDataOutputFile"]   >> '=' > quotedString [phoenix::bind(&ConfigData::setSrcDataOutputFile, ptr, qi::_1)] > separator);
-        numCor = (lexeme["NumCores"]            >> '=' > int_         [phoenix::bind(&ConfigData::setSetNumCores, ptr, qi::_1)] > separator);
+        detSif = (lexeme["DetSpecInputFile"]    >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setDetSpecInputFile, ptr, qi::_1)] > separator);
+        detPif = (lexeme["DetPosInputFile"]     >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setDetPosInputFile, ptr, qi::_1)] > separator);
+        panPif = (lexeme["PanelPosInputFile"]   >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setPanelPosInputFile, ptr, qi::_1)] > separator);
+        panSof = (lexeme["PanelSpecOutputFile"] >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setPanelSpecOutputFile, ptr, qi::_1)] > separator);
+        srcDof = (lexeme["SrcDataOutputFile"]   >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setSrcDataOutputFile, ptr, qi::_1)] > separator);
+        numCor = (lexeme["NumCores"]            >> '=' > int_         [phoenix::bind(&Data::ConfigData::setSetNumCores, ptr, qi::_1)] > separator);
         // define the start rule which holds the whole monstrosity and set the rule to skip blanks
         // if we skipped spaces we could not parse newlines as separators
         startRule = skip(blank) [configDataRule];
@@ -68,8 +73,9 @@ private:
     qi::rule<Iterator, qi::blank_type> panSof, srcDof, numCor;
     
     // hold the pointer that we are going to bind to
-    ConfigData* ptr;
+    Data::ConfigData* ptr;
 };
 
-
+}
+}
 #endif //POSITIONRECONSTRUCTION_SRC_INPUT_PARSERS_CONFIGPARSER_H
