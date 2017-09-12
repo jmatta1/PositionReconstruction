@@ -32,24 +32,27 @@ public:
         using qi::blank;
         using qi::lexeme;
         using qi::int_;
+        using qi::float_;
         using qi::fail;
         using qi::on_error;
         using Utility::eol_;
         using Utility::separator;
         //define the rules to parse the parameters
-        detSif = (lexeme["DetSpecInputFile"]    >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setDetSpecInputFile, ptr, qi::_1)] > separator);
-        detPif = (lexeme["DetPosInputFile"]     >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setDetPosInputFile, ptr, qi::_1)] > separator);
-        panPif = (lexeme["PanelPosInputFile"]   >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setPanelPosInputFile, ptr, qi::_1)] > separator);
+        detSif = (lexeme["DetSpecInputFile"]    >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setDetSpecInputFile,    ptr, qi::_1)] > separator);
+        detPif = (lexeme["DetPosInputFile"]     >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setDetPosInputFile,     ptr, qi::_1)] > separator);
+        panPif = (lexeme["PanelPosInputFile"]   >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setPanelPosInputFile,   ptr, qi::_1)] > separator);
         panSof = (lexeme["PanelSpecOutputFile"] >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setPanelSpecOutputFile, ptr, qi::_1)] > separator);
-        srcDof = (lexeme["SrcDataOutputFile"]   >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setSrcDataOutputFile, ptr, qi::_1)] > separator);
-        numCor = (lexeme["NumCores"]            >> '=' > int_         [phoenix::bind(&Data::ConfigData::setSetNumCores, ptr, qi::_1)] > separator);
+        srcDof = (lexeme["SrcDataOutputFile"]   >> '=' > quotedString [phoenix::bind(&Data::ConfigData::setSrcDataOutputFile,   ptr, qi::_1)] > separator);
+        numCor = (lexeme["NumCores"]            >> '=' > int_         [phoenix::bind(&Data::ConfigData::setSetNumCores,         ptr, qi::_1)] > separator);
+        minEn  = (lexeme["MinimumEnergy"]       >> '=' > float_       [phoenix::bind(&Data::ConfigData::setMinEnergy,           ptr, qi::_1)] > separator);
+        maxEn  = (lexeme["MaximumEnergy"]       >> '=' > float_       [phoenix::bind(&Data::ConfigData::setMaxEnergy,           ptr, qi::_1)] > separator);
         // define the start rule which holds the whole monstrosity and set the rule to skip blanks
         // if we skipped spaces we could not parse newlines as separators
         startRule = skip(blank) [configDataRule];
         configDataRule = *eol_ > lexeme["[StartConfig]"] > *eol_
             > (
                 detSif ^ detPif ^ panPif ^ panSof ^
-                srcDof ^ numCor
+                srcDof ^ numCor ^ minEn ^ maxEn
             ) > lexeme["[EndConfig]"];
         
         on_error<fail>(startRule,
@@ -71,6 +74,7 @@ private:
     // parameters
     qi::rule<Iterator, qi::blank_type> detSif, detPif, panPif;
     qi::rule<Iterator, qi::blank_type> panSof, srcDof, numCor;
+    qi::rule<Iterator, qi::blank_type> minEn, maxEn;
     
     // hold the pointer that we are going to bind to
     Data::ConfigData* ptr;

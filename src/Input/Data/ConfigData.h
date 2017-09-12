@@ -22,6 +22,8 @@ public:
     std::string panelSpecOutputFile;
     std::string srcDataOutputFile;
     int numCores;
+    float minEnergy;
+    float maxEnergy;
 
     void setDetSpecInputFile(const std::string& input){detSpecInputFile = input; setDetSpecInputFile_ = true;}
     void setDetPosInputFile(const std::string& input){detPosInputFile = input; setDetPosInputFile_ = true;}
@@ -29,9 +31,10 @@ public:
     void setPanelSpecOutputFile(const std::string& input){panelSpecOutputFile = input; setPanelSpecOutputFile_ = true;}
     void setSrcDataOutputFile(const std::string& input){srcDataOutputFile = input; setSrcDataOutputFile_ = true;}
     void setSetNumCores(int input){numCores = input; setNumCores_ = true;}
+    void setMinEnergy(float input){minEnergy = input; setMinEnergy_ = true;}
+    void setMaxEnergy(float input){maxEnergy = input; setMaxEnergy_ = true;}
     
-    bool validate(){return (setDetSpecInputFile_ && setDetPosInputFile_ && setPanelPosInputFile_ &&
-                            setPanelSpecOutputFile_ && setSrcDataOutputFile_ && setNumCores_);}
+    bool validate();
     void printValidationErrors(std::ostream& os);
 
     friend std::ostream& operator<<(std::ostream& os, const ConfigData& cd);
@@ -42,6 +45,8 @@ private:
     bool setPanelSpecOutputFile_;
     bool setSrcDataOutputFile_;
     bool setNumCores_;
+    bool setMinEnergy_;
+    bool setMaxEnergy_;
 };
 
 }

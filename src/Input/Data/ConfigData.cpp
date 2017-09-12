@@ -10,31 +10,59 @@ namespace Input
 namespace Data
 {
 
+void ConfigData::validate()
+{
+    bool allSet =  (setDetSpecInputFile_ && setDetPosInputFile_ &&
+                    setPanelPosInputFile_ && setPanelSpecOutputFile_ &&
+                    setSrcDataOutputFile_ && setNumCores_ &&
+                    setMinEnergy_ && setMaxEnergy_);
+    
+    bool goodParams = ((minEnergy >= 0.0) && (minEnergy < maxEnergy));
+    
+    return (allSet && goodParams);
+}
+
 void ConfigData::printValidationErrors(std::ostream& os)
 {
-    if(setDetSpecInputFile_)
+    if(!setDetSpecInputFile_)
     {
         os << "The detector spectrum input file was not set" << std::endl;
     }
-    if(setDetPosInputFile_)
+    if(!setDetPosInputFile_)
     {
         os << "The detector position input file was not set" << std::endl;
     }
-    if(setPanelPosInputFile_)
+    if(!setPanelPosInputFile_)
     {
         os << "The AD panel input file was not set" << std::endl;
     }
-    if(setPanelSpecOutputFile_)
+    if(!setPanelSpecOutputFile_)
     {
         os << "The panel spectrum output file was not set" << std::endl;
     }
-    if(setSrcDataOutputFile_)
+    if(!setSrcDataOutputFile_)
     {
         os << "The source data output file was not set." << std::endl;
     }
-    if(setNumCores_)
+    if(!setNumCores_)
     {
         os << "The number of cores was not set." << std::endl;
+    }
+    if(!setMinEnergy_)
+    {
+        os << "The minimum energy was not set." << std::endl;
+    }
+    if(!setMaxEnergy_)
+    {
+        os << "The maximum energy was not set." << std::endl;
+    }
+    if(minEnergy < 0.0)
+    {
+        os << "The minimum energy must be greater than or equal to 0.0" << std::endl;
+    }
+    if(minEnergy >= maxEnergy)
+    {
+        os << "The minimum energy less than the maximum energy" << std::endl;
     }
 }
 
@@ -47,7 +75,9 @@ std::ostream& operator<<(std::ostream& os, const ConfigData& cd)
        << "    AD Panel Input File           = " << cd.panelPosInputFile   << "\n"
        << "    Panel Spectrum Output File    = " << cd.panelSpecOutputFile << "\n"
        << "    Source Data Ouput File        = " << cd.srcDataOutputFile   << "\n"
-       << "    Number of Cores               = " << cd.numCores            << "\n";
+       << "    Number of Cores               = " << cd.numCores            << "\n"
+       << "    Minimum Energy                = " << cd.minEnergy           << "\n"
+       << "    Maximum Energy                = " << cd.maxEnergy           << "\n";
     return os << "[End Configuration Input]";
 }
 
