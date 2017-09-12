@@ -41,12 +41,12 @@ void DetectorPositionData::printValidationErrors(std::ostream& os)
                       (xPosition.size() == tempSize) &&
                       (yPosition.size() == tempSize) &&
                       (zPosition.size() == tempSize));
-    if(notEmpty)
+    if(!notEmpty)
     {
         os << "There must be at least one entry in each column" << std::endl;
     }
     
-    if(equalSize)
+    if(!equalSize)
     {
         os << "Each column must have the same number of entries" << std::endl;
     }

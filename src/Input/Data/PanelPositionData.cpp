@@ -54,12 +54,12 @@ void PanelPositionData::printValidationErrors(std::ostream& os)
                       (zPosition.size() == tempSize) &&
                       (zHalfSize.size() == tempSize) &&
                       (zNorm.size() == tempSize));
-    if(notEmpty)
+    if(!notEmpty)
     {
         os << "There must be at least one entry in each column" << std::endl;
     }
     
-    if(equalSize)
+    if(!equalSize)
     {
         os << "Each column must have the same number of entries" << std::endl;
     }
