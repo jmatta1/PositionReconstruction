@@ -10,7 +10,7 @@ namespace Input
 namespace Data
 {
 
-void ConfigData::validate()
+bool ConfigData::validate()
 {
     bool allSet =  (setDetSpecInputFile_ && setDetPosInputFile_ &&
                     setPanelPosInputFile_ && setPanelSpecOutputFile_ &&
@@ -76,8 +76,8 @@ std::ostream& operator<<(std::ostream& os, const ConfigData& cd)
        << "    Panel Spectrum Output File    = " << cd.panelSpecOutputFile << "\n"
        << "    Source Data Ouput File        = " << cd.srcDataOutputFile   << "\n"
        << "    Number of Cores               = " << cd.numCores            << "\n"
-       << "    Minimum Energy                = " << cd.minEnergy           << "\n"
-       << "    Maximum Energy                = " << cd.maxEnergy           << "\n";
+       << "    Minimum Energy (MeV)          = " << cd.minEnergy           << "\n"
+       << "    Maximum Energy (MeV)          = " << cd.maxEnergy           << "\n";
     return os << "[End Configuration Input]";
 }
 

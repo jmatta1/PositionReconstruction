@@ -58,9 +58,8 @@ public:
         on_error<fail>(startRule,
                        std::cout << phoenix::val("Error! Expecting ")
                        << qi::_4                             // what failed?
-                       << phoenix::val(" here: \n\"")
+                       << phoenix::val(" here: \n")
                        << phoenix::construct<std::string>(qi::_3, qi::_2) // iterators to error-pos, end
-                       << phoenix::val("\"")
                        << std::endl);
     }
 private:
