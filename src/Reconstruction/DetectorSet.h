@@ -32,7 +32,7 @@ public:
 private:
     int posCount;
     float* detCoords; //array of coordinates, will have dim = 4*posCount,
-    //only 3 floats are needed per coordinate, but the 4 gives memory alignment for 4byte floats
+    //only 3 floats are needed per coordinate, but the 4 gives memory alignment
     
     int enBinCount;
     float* centerEn;
