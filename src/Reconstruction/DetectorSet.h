@@ -17,7 +17,7 @@ public:
     DetectorSet(int numEnBin, int numPos);
     ~DetectorSet();
 
-    float calculateWeights(int posNum, float* srcPt, float intensity) const;
+    float calculateDetectorWeight(int posNum, float* srcPt, float intensity) const;
     void setPosition(int ind, float xpos, float ypos, float zpos)
     {
         detCoords[CoordSize*ind]=xpos;detCoords[CoordSize*ind+1]=ypos;detCoords[CoordSize*ind+2]=zpos;

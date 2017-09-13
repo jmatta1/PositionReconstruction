@@ -9,7 +9,7 @@ DetectorSet::DetectorSet(int numPos, int numEnBin):
     posCount(numPos), enBinCount(numEnBin)
 {
     detCoords = new float[CoordSize*posCount];
-    for(int i=0; i<numEnBin; ++i)
+    for(int i=0; i<posCount; ++i)
     {
         detCoords[CoordSize*i+0] = 0.0f;
         detCoords[CoordSize*i+1] = 0.0f;
@@ -18,7 +18,7 @@ DetectorSet::DetectorSet(int numPos, int numEnBin):
     }
     posSpectra = new float*[enBinCount];
     centerEn = new float[enBinCount];
-    for(int i=0; i<numEnBin; ++i)
+    for(int i=0; i<enBinCount; ++i)
     {
         centerEn[i] = 0.0f;
         posSpectra[i] = new float[posCount];
@@ -33,7 +33,7 @@ DetectorSet::DetectorSet(int numPos, int numEnBin):
 DetectorSet::~DetectorSet()
 {
     delete[] detCoords;
-    for(int i=0; i<numEnBin; ++i)
+    for(int i=0; i<enBinCount; ++i)
     {
         delete[] posSpectra[i];
     }
@@ -42,7 +42,7 @@ DetectorSet::~DetectorSet()
 }
 
 
-float DetectorSet::calculateWeights(int posNum, float* srcPt, float intensity) const
+float DetectorSet::calculateDetectorWeight(int posNum, float* srcPt, float intensity) const
 {//calculates the approximation of the intensity falling on each detector for a pt source at a given location
     int offset = CoordSize*posNum;
     
