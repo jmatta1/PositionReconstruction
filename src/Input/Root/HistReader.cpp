@@ -22,10 +22,10 @@ Reconstruction::DetectorSet* HistReader::readPositionSpectra()
     TH1D* hist = (TH1D*)inFile->Get(specName.c_str());
     int loBin = hist->FindBin(minEn);
     int hiBin = hist->FindBin(maxEn);
-    int numBins = (hiBin-loBin+1);
+    int numEnBins = (hiBin-loBin+1);
     //now construct the detector set
     int numRuns = detPosData->runNumber.size();
-    Reconstruction::DetectorSet* output = new Reconstruction::DetectorSet(numBins, numRuns);
+    Reconstruction::DetectorSet* output = new Reconstruction::DetectorSet(numRuns, numEnBins);
     //load the energy centers
     for(int j=loBin; j<=hiBin; ++j)
     {
@@ -40,7 +40,7 @@ Reconstruction::DetectorSet* HistReader::readPositionSpectra()
         //set the position for this particular position bin
         output->setPosition(i, detPosData->xPosition[i],
                             detPosData->yPosition[i], detPosData->zPosition[i]);
-        for(int j=0; j < numBins; ++j)
+        for(int j=0; j < numEnBins; ++j)
         {
             output->setPosBin(i, j, hist->GetBinContent(j+loBin));
         }
