@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     //read and output the primary input file
     if(!Input::parseValAndPrintConfigFile(&config, configFileName, std::cout))
     {
-        std::cout << "Primary Configuration File Input Error, Quitting" << std::endl;
+        std::cout << "Primary configuration file input error, quitting" << std::endl;
         return 1;
     }
     else
@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
     Input::Data::DetectorPositionData detPos;
     if(!Input::parseValAndPrintDetectorPositionFile(&detPos, config.detPosInputFile, std::cout))
     {
-        std::cout << "Detector Position File Input Error, Quitting" << std::endl;
+        std::cout << "Detector position file input error, quitting" << std::endl;
         return 1;
     }
     else
@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
     Input::Data::PanelPositionData panPos;
     if(!Input::parseValAndPrintPanelPositionFile(&panPos, config.panelPosInputFile, std::cout))
     {
-        std::cout << "Panel Position File Input Error, Quitting" << std::endl;
+        std::cout << "Panel position file input error, quitting" << std::endl;
         return 1;
     }
     else
@@ -57,9 +57,10 @@ int main(int argc, char* argv[])
         std::cout << panPos << std::endl;
     }
     //read the position scan data into a DetectorSet object
+    std::cout << "Reading decomposed position scan spectra" << std::endl;
     Input::HistReader histReader(config.detSpecInputFile, &detPos, config.minEnergy, config.maxEnergy);
     Reconstruction::DetectorSet* detData = histReader.readPositionSpectra();
-    
+    std::cout << "Done reading spectra" << std::endl;
     
     return 0;
 }
