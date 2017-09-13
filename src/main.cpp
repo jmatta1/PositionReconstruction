@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
         std::cout << panPos << std::endl;
     }
     //read the position scan data into a DetectorSet object
-    Input::HistReader histReader(config.detSpecInputFile, detPos, config.minEnergy, config.maxEnergy);
+    Input::HistReader histReader(config.detSpecInputFile, &detPos, config.minEnergy, config.maxEnergy);
     Reconstruction::DetectorSet* detData = histReader.readPositionSpectra();
     
     
