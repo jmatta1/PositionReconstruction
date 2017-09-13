@@ -1,9 +1,13 @@
+// includes for C system headers
+// includes for C++ system headers
 #include<iostream>
-
+// includes from other libraries
+// includes from this code
 #include"Input/Data/ConfigData.h"
 #include"Input/Data/DetectorPositionData.h"
 #include"Input/Data/PanelPositionData.h"
 #include"Input/ParseFunctions.h"
+#include"Input/Root/HistReader.h"
 
 
 int main(int argc, char* argv[])
@@ -52,6 +56,10 @@ int main(int argc, char* argv[])
     {
         std::cout << panPos << std::endl;
     }
+    //read the position scan data into a DetectorSet object
+    Input::HistReader histReader(config.detSpecInputFile, detPos, config.minEnergy, config.maxEnergy);
+    Reconstruction::DetectorSet* detData = histReader.readPositionSpectra();
+    
     
     return 0;
 }
