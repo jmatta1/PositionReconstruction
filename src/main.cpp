@@ -8,6 +8,7 @@
 #include"Input/Data/PanelPositionData.h"
 #include"Input/ParseFunctions.h"
 #include"Input/Root/HistReader.h"
+#include"Reconstruction/Physical/DetectorSet.h"
 
 
 int main(int argc, char* argv[])
@@ -60,6 +61,10 @@ int main(int argc, char* argv[])
     std::cout << "Reading decomposed position scan spectra" << std::endl;
     Input::HistReader histReader(config.detSpecInputFile, &detPos, config.minEnergy, config.maxEnergy);
     Reconstruction::DetectorSet* detData = histReader.readPositionSpectra();
+    if(detData == nullptr)
+    {
+        std::cout << "Spectrum file input error, quitting" << std::endl;
+    }
     std::cout << "Done reading spectra" << std::endl;
     
     return 0;

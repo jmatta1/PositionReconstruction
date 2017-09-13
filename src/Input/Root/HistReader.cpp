@@ -7,7 +7,7 @@
 #include<TH1.h>
 // includes from this code
 #include"Input/Data/DetectorPositionData.h"
-#include"Reconstruction/DetectorSet.h"
+#include"Reconstruction/Physical/DetectorSet.h"
 
 namespace Input
 {
@@ -15,11 +15,22 @@ namespace Input
 Reconstruction::DetectorSet* HistReader::readPositionSpectra()
 {
     TFile* inFile = new TFile(fileName.c_str());
-    
+    if(inFile->IsZombie() || !inFile->IsOpen())
+    {
+        std::cout<<"Root fiile with decomposition histograms \""<<fileName<<"\" could not be opened." << std::endl;
+        delete inFile;
+        return nullptr;
+    }
     //first read the first histogram just to get the number of energy bins so
     //that we can construct the detector set
     buildSpecName(detPosData->detectorNumber[0], detPosData->runNumber[0]);
     TH1D* hist = (TH1D*)inFile->Get(specName.c_str());
+    if(hist == nullptr)
+    {
+        std::cout<<"Decomposition histogram \""<<specName<<"\" was not in the root file"<<std::endl;
+        delete inFile;
+        return nullptr;
+    }
     int loBin = hist->FindBin(minEn);
     int hiBin = hist->FindBin(maxEn);
     int numEnBins = (hiBin-loBin+1);
@@ -37,6 +48,13 @@ Reconstruction::DetectorSet* HistReader::readPositionSpectra()
     {
         buildSpecName(detPosData->detectorNumber[i], detPosData->runNumber[i]);
         hist = (TH1D*)inFile->Get(specName.c_str());
+        if(hist == nullptr)
+        {
+            std::cout<<"Decomposition histogram \""<<specName<<"\" was not in the root file"<<std::endl;
+            delete inFile;
+            delete output;
+            return nullptr;
+        }
         //set the position for this particular position bin
         output->setPosition(i, detPosData->xPosition[i],
                             detPosData->yPosition[i], detPosData->zPosition[i]);
