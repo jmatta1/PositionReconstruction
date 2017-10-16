@@ -1,0 +1,3 @@
+[submodule "src/Reconstruction/MCMC"]
+	path = src/Reconstruction/MCMC
+	url = git@github.com:jmatta1/MCMCpp.git
