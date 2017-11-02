@@ -1,24 +1,8 @@
 cmake_minimum_required (VERSION 2.6)
-# This is the build file for ORCHID (Oak Ridge baCkground at HfIr Daq)
 project (PositionReconstruction)
 
-# The version number.
-#set(ORCHID_VERSION_MAJOR 0)
-#set(ORCHID_VERSION_MINOR 9)
-#set(ORCHID_VERSION_PATCH 0)
-#set(ORCHID_VERSION ${ORCHID_VERSION_MAJOR}.${ORCHID_VERSION_MINOR}.${ORCHID_VERSION_PATCH})
-
-# Set the version number and build type in the header /Utility/OrchidConfig.h
-#configure_file("${PROJECT_SOURCE_DIR}/Utility/OrchidConfig.h.in"
-#               "${PROJECT_BINARY_DIR}/Utility/OrchidConfig.h"
-#               @ONLY)
-
 # force the existence of the BOOST library package
-# find_package(Boost COMPONENTS thread log log_setup filesystem date_time REQUIRED)
-# find the threading stuff, because we need it for the log
-# find_package(Threads REQUIRED)
-# find ROOT stuff
-# find_package(Boost REQUIRED)
+find_package(Boost COMPONENTS thread log log_setup filesystem date_time REQUIRED)
 list(APPEND CMAKE_PREFIX_PATH $ENV{ROOTSYS})
 find_package(ROOT COMPONENTS Core RIO Hist Tree REQUIRED)
 
